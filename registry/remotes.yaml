@@ -1,0 +1,11 @@
+remotes:
+  - alias: local-dev
+    type: local
+    status: available
+    gpu: null
+    notes: Local development machine.
+  - alias: gpu-cloud-tbd
+    type: gpu_cloud
+    status: planned
+    gpu: TBD
+    notes: Replace with redacted alias after first GPU cloud target is available.

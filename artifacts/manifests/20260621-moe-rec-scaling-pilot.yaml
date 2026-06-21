@@ -1,0 +1,7 @@
+artifact_manifest:
+  experiment_id: 20260621-moe-rec-scaling-pilot
+  status: planned
+  owner: TBD
+  git_commit: TBD
+  external_artifacts: []
+  notes: Fill after the first run is created.

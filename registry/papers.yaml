@@ -1,0 +1,37 @@
+papers:
+  - key: ardalani2022scalingrecsys
+    title: Understanding Scaling Laws for Recommendation Models
+    topic: recsys_scaling_law
+    priority: high
+    url: https://arxiv.org/abs/2208.08489
+    status: queued
+  - key: zhang2023scalingseqrec
+    title: Scaling Law of Large Sequential Recommendation Models
+    topic: sequential_rec_scaling_law
+    priority: high
+    url: https://arxiv.org/abs/2311.11351
+    status: queued
+  - key: li2025foundationexpert
+    title: "Realizing Scaling Laws in Recommender Systems: A Foundation-Expert Paradigm for Hyperscale Model Deployment"
+    topic: production_rec_scaling
+    priority: high
+    url: https://arxiv.org/abs/2508.02929
+    status: queued
+  - key: zhao2025moescalinglaw
+    title: Towards a Comprehensive Scaling Law of Mixture-of-Experts
+    topic: moe_scaling_law
+    priority: high
+    url: https://arxiv.org/abs/2509.23678
+    status: queued
+  - key: zhu2025foldmoe
+    title: "FoldMoE: Efficient Long Sequence MoE Training via Attention-MoE Pipelining"
+    topic: moe_training_systems
+    priority: high
+    url: https://aclanthology.org/2025.acl-long.186/
+    status: queued
+  - key: qing2025hecate
+    title: "Hecate: Unlocking Efficient Sparse Model Training via Fully Sharded Sparse Data Parallelism"
+    topic: moe_training_systems
+    priority: high
+    url: https://arxiv.org/abs/2502.02581
+    status: queued

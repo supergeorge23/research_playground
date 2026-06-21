@@ -1,0 +1,9 @@
+models:
+  - id: dense-rec-baseline
+    family: dense_rec
+    status: placeholder
+    notes: Baseline dense recommender for matched-compute comparisons.
+  - id: moe-rec-baseline
+    family: moe_rec
+    status: placeholder
+    notes: Current internal MoE recommender setup to be documented.

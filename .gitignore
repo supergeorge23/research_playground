@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+ssh_config*
+secrets/
+
+# Build and logs
+build/
+dist/
+*.egg-info/
+logs/
+*.log
+
+# Experiment outputs: keep manifests and summaries, not heavy outputs.
+artifacts/raw/
+artifacts/checkpoints/
+artifacts/datasets/
+artifacts/tensorboard/
+artifacts/wandb/
+experiments/**/outputs/
+experiments/**/checkpoints/
+experiments/**/wandb/
+experiments/**/tensorboard/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/

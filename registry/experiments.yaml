@@ -1,0 +1,8 @@
+experiments:
+  - id: 20260621-moe-rec-scaling-pilot
+    title: MoE recommendation scaling law pilot
+    status: planned
+    owner: TBD
+    objective: Validate first controlled scaling-law fit for MoE recommenders.
+    docs: experiments/20260621-moe-rec-scaling-pilot/README.md
+    artifact_manifest: artifacts/manifests/20260621-moe-rec-scaling-pilot.yaml

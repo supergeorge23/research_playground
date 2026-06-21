@@ -1,0 +1,7 @@
+datasets:
+  - id: rec-scaling-pilot-data
+    status: placeholder
+    owner: TBD
+    description: Redacted data snapshot alias for first scaling-law pilot.
+    storage: TBD
+    privacy: private
