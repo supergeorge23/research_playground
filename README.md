@@ -1,23 +1,22 @@
-# MoE Rec Scaling Law Mega Repo
+# Research Playground
 
 This repository is the single source of truth for research, code, experiments,
-artifacts, literature, OKRs, and infrastructure notes around scaling laws for
-Mixture-of-Experts (MoE) in recommender systems.
+artifacts, literature, OKRs, and infrastructure notes for multi-person AI
+research collaboration.
 
-## Core Thesis
+## Scope
 
-We have observed that MoE models in recommender systems exhibit scaling-law
-behavior. The next research phase is to turn this observation into a rigorous,
-reproducible, and publishable body of work:
+This is a general research workspace. Individual research directions live as
+tracks under `docs/research/`, `experiments/`, `registry/`, and `docs/papers/`.
 
-- quantify how recommendation quality scales with data, total parameters,
-  activated parameters, experts, compute, and serving constraints;
-- explain where MoE changes the scaling frontier compared with dense
-  recommendation models;
-- identify the training and serving infrastructure bottlenecks that appear when
-  this scaling law is pushed toward production workloads;
-- maintain all code, experiment records, literature, and infra state in one
-  versioned mega repo.
+Current seeded tracks:
+
+- MoE recommendation scaling laws;
+- LLM4Rec training and recommendation infrastructure;
+- MoE model infrastructure;
+- FlashAttention and attention-kernel industrialization;
+- future AI infra and applied research tracks added through OKR or decision
+  records.
 
 ## Repository Map
 
@@ -49,13 +48,13 @@ reproducible, and publishable body of work:
    policy is decided.
 4. SSH hostnames, cloud accounts, secrets, private data paths, and tokens must
    not be committed. Use redacted aliases in `docs/infra/` and `registry/`.
-5. Literature notes should capture why a paper matters to our scaling-law
-   thesis, not just summarize the abstract.
+5. Literature notes should capture why a paper matters to a concrete research
+   track, not just summarize the abstract.
 
 ## Current Priority
 
-See `docs/okr/2026-h2-okr.md` and
-`docs/research/moe-rec-scaling-law-agenda.md`.
+See `docs/okr/2026-h2-okr.md` for repo-level execution. The first active
+research track is documented in `docs/research/moe-rec-scaling-law-agenda.md`.
 
 ## Quick Commands
 

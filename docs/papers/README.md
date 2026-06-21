@@ -7,7 +7,7 @@ Recommended layout:
 
 ```text
 docs/papers/
-  scaling-laws-for-moe-recsys/
+  topic-or-paper-slug/
     outline.md
     draft.md
     figures.md

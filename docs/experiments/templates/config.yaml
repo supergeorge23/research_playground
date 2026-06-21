@@ -2,6 +2,7 @@ experiment:
   id: YYYYMMDD-short-topic-scale-owner
   owner: TBD
   status: planned
+  track: TBD
   hypothesis: TBD
 
 data:
@@ -11,13 +12,9 @@ data:
   feature_set: TBD
 
 model:
-  family: moe_rec
+  family: TBD
   total_parameters: null
-  activated_parameters: null
-  num_experts: null
-  active_experts: null
-  shared_experts: null
-  router: TBD
+  notes: TBD
 
 training:
   framework: TBD
@@ -38,3 +35,6 @@ metrics:
   primary: []
   secondary: []
   serving: []
+
+track_specific:
+  notes: Add MoE, LLM4Rec, attention-kernel, or serving-specific fields here.

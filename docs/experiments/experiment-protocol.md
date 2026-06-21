@@ -11,7 +11,13 @@ YYYYMMDD-short-topic-scale-owner
 Example:
 
 ```text
-20260621-moe-rec-scaling-pilot-gs
+20260621-short-topic-scale-owner
+```
+
+Current active-track example:
+
+```text
+20260621-moe-rec-scaling-pilot
 ```
 
 ## Required Files
@@ -32,15 +38,15 @@ Each experiment folder must include:
 - git commit
 - data snapshot
 - model family
-- dense or MoE
-- total parameters
-- activated parameters
-- number of experts
-- active experts
 - train FLOPs or GPU-hours
-- offline metrics
-- serving metrics if available
+- primary quality metrics
+- system, cost, or serving metrics if available
 - known caveats
+
+Track-specific metadata should be added when relevant. For MoE recommendation
+experiments, include dense or MoE family, total parameters, activated
+parameters, number of experts, active experts, router settings, and serving
+latency.
 
 ## Review Checklist
 

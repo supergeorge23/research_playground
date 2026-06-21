@@ -1,7 +1,8 @@
 # Literature Reading List
 
-This file tracks papers that are directly relevant to MoE recommendation
-scaling laws and the systems work needed to make them practical.
+This file tracks papers that are directly relevant to active research tracks.
+The initial seed focuses on MoE recommendation scaling laws and the systems work
+needed to make them practical.
 
 ## High-Priority Papers
 

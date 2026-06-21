@@ -6,16 +6,19 @@ Owner: Zhengqi Wang
 
 ## Context
 
-The project is moving from an observed MoE recommendation scaling-law signal to
-a multi-stream research effort covering OKRs, literature, code, experiment
-records, artifacts, and future remote GPU execution.
+The project needs a shared workspace for multiple research directions, including
+but not limited to MoE recommendation scaling laws. The repo must cover OKRs,
+literature, code, experiment records, artifacts, and future remote GPU
+execution.
 
 ## Decision
 
 Use `supergeorge23/research_playground` as the single source of truth for the
-research program. Keep human-readable plans under `docs/`, reusable code under
-`src/`, experiment instances under `experiments/`, lightweight artifact pointers
-under `artifacts/`, and machine-readable indexes under `registry/`.
+multi-person research program. Keep human-readable plans under `docs/`,
+reusable code under `src/`, experiment instances under `experiments/`,
+lightweight artifact pointers under `artifacts/`, and machine-readable indexes
+under `registry/`. Treat MoE recommendation scaling laws as the first active
+research track, not as the repository identity.
 
 ## Consequences
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the lightweight research mega-repo contract."""
+"""Validate the lightweight research repository contract."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ REQUIRED_PATHS = [
     "CONTRIBUTING.md",
     "docs/okr/2026-h2-okr.md",
     "docs/okr/weekly/README.md",
-    "docs/research/moe-rec-scaling-law-agenda.md",
+    "docs/research/README.md",
     "docs/literature/reading-list.md",
     "docs/experiments/experiment-protocol.md",
     "docs/infra/github-sync.md",
