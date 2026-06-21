@@ -26,14 +26,17 @@ reproducible, and publishable body of work:
 | `docs/okr/` | Team OKRs, weekly execution state, milestones, and decision records. |
 | `docs/research/` | Research agenda, hypotheses, paper outlines, and technical notes. |
 | `docs/literature/` | Reading list, paper summaries, BibTeX, and open questions. |
+| `docs/papers/` | Internal reports, paper drafts, rebuttal notes, and sanitized release plans. |
 | `docs/experiments/` | Experiment protocol, naming rules, templates, and review checklist. |
 | `docs/infra/` | GPU cloud, SSH, remote machines, security, and environment notes. |
+| `docs/decisions/` | Lightweight decision records for repo, research, and infra choices. |
 | `src/` | Production-quality research code and reusable libraries. |
 | `configs/` | Versioned experiment, model, data, and infra configs. |
 | `experiments/` | One folder per tracked experiment run or experiment family. |
 | `artifacts/` | Lightweight artifact manifests. Large binaries stay outside Git. |
 | `registry/` | Machine-readable registries for experiments, papers, models, datasets, and remotes. |
 | `scripts/` | Repo automation scripts. |
+| `.github/` | Pull request, issue, and validation workflow templates for collaboration. |
 
 ## Operating Rules
 
@@ -53,3 +56,17 @@ reproducible, and publishable body of work:
 
 See `docs/okr/2026-h2-okr.md` and
 `docs/research/moe-rec-scaling-law-agenda.md`.
+
+## Quick Commands
+
+Create a tracked experiment scaffold:
+
+```bash
+scripts/new_experiment.sh YYYYMMDD-short-topic-scale-owner
+```
+
+Validate the repository structure before pushing:
+
+```bash
+python3 scripts/validate_repo.py
+```

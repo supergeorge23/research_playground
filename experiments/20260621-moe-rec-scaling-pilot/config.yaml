@@ -1,0 +1,43 @@
+experiment:
+  id: 20260621-moe-rec-scaling-pilot
+  owner: TBD
+  status: planned
+  hypothesis: >
+    MoE recommenders follow a predictable scaling curve when quality is modeled
+    as a function of data scale, total parameters, activated parameters, and
+    compute.
+
+data:
+  snapshot: rec-scaling-pilot-data
+  train_events: null
+  eval_events: null
+  feature_set: TBD
+
+model:
+  family: moe_rec
+  total_parameters: null
+  activated_parameters: null
+  num_experts: null
+  active_experts: null
+  shared_experts: null
+  router: TBD
+
+training:
+  framework: TBD
+  precision: TBD
+  global_batch_size: null
+  steps: null
+  optimizer: TBD
+  train_flops: null
+  gpu_hours: null
+
+infra:
+  remote_alias: TBD
+  gpu_type: TBD
+  num_gpus: null
+  network: TBD
+
+metrics:
+  primary: []
+  secondary: []
+  serving: []

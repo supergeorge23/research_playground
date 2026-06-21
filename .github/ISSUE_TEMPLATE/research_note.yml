@@ -1,0 +1,25 @@
+name: Research note
+description: Track literature, paper ideas, or analysis tasks.
+title: "[research] "
+labels: ["research"]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      placeholder: MoE rec scaling law, expert imbalance, LLM4Rec infra
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What should this note answer?
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence needed
+      description: Papers, experiment IDs, metrics, or code paths.
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected output
+      description: Literature note, paper section, decision record, plot, or prototype.

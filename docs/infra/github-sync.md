@@ -2,10 +2,10 @@
 
 ## Recommended Remote
 
-Suggested repository:
+Repository:
 
 ```text
-supergeorge23/moe-rec-scaling-law
+supergeorge23/research_playground
 ```
 
 Suggested visibility: private until papers, code, and internal experiment notes
@@ -16,26 +16,23 @@ are sanitized.
 - Local path: `/Users/supergeorge/Documents/AI_Research`
 - Branch: `main`
 - Initial commit exists.
+- GitHub remote target: `https://github.com/supergeorge23/research_playground.git`
 
-## Create Remote Repository
+## Sync Remote Repository
 
-Current Codex environment can access the GitHub connector for existing
-repositories, but it does not expose a create-repository operation. The local
-machine also does not currently have the `gh` CLI available.
-
-Create the empty GitHub repository through the GitHub UI, then run:
+The GitHub repository already exists. Connect and push the local repo with:
 
 ```bash
 cd /Users/supergeorge/Documents/AI_Research
-git remote add origin https://github.com/supergeorge23/moe-rec-scaling-law.git
+git remote add origin https://github.com/supergeorge23/research_playground.git
 git push -u origin main
 ```
 
-If `gh` is installed later:
+If `origin` already exists, verify it points to the same repository:
 
 ```bash
 cd /Users/supergeorge/Documents/AI_Research
-gh repo create supergeorge23/moe-rec-scaling-law --private --source=. --remote=origin --push
+git remote -v
 ```
 
 ## Branch and Protection Policy

@@ -1,0 +1,31 @@
+name: Experiment
+description: Track a new experiment or experiment family.
+title: "[experiment] "
+labels: ["experiment"]
+body:
+  - type: input
+    id: objective
+    attributes:
+      label: OKR objective
+      description: Link this experiment to an active OKR objective or exploratory decision.
+      placeholder: Objective 2
+  - type: input
+    id: experiment_id
+    attributes:
+      label: Experiment ID
+      placeholder: YYYYMMDD-short-topic-scale-owner
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: State a falsifiable claim.
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics
+      description: Primary quality, cost, latency, and stability metrics.
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Artifacts
+      description: Expected manifests, plots, logs, checkpoints, or reports.

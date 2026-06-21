@@ -34,3 +34,10 @@ naive dense-parameter-only fit.
 - metric definitions;
 - available GPU budget;
 - baseline dense model family.
+
+## Tracking Files
+
+- Config: `config.yaml`
+- Run log: `run.md`
+- Results: `results.md`
+- Artifact pointers: `artifacts.yaml`
