@@ -1,0 +1,6 @@
+artifact_manifest:
+  experiment_id: 20260622-moe-ep-fp8-roofline-pilot
+  status: planned
+  owner: Zhengqi Wang
+  git_commit: TBD
+  external_artifacts: []

@@ -9,6 +9,7 @@ and links to code, artifacts, literature, and paper drafts.
 | Track | Status | Entry Point |
 | --- | --- | --- |
 | MoE recommendation scaling laws | Active | `moe-rec-scaling-law-agenda.md` |
+| Utilization-aware precision × parallelism for MoE inference | Active | `moe-precision-parallelism-agenda.md` |
 
 ## Proposed Tracks
 

@@ -1,0 +1,42 @@
+experiment:
+  id: 20260622-moe-ep-fp8-roofline-pilot
+  owner: Zhengqi Wang
+  status: planned
+  track: moe-precision-parallelism-codesign
+  hypothesis: >
+    EP-inference benefit is regime-dependent and roofline-predictable; per-expert
+    quantization sensitivity is not monotone in activation frequency; FP8 realized
+    speedup depends on each expert's GEMM roofline regime.
+
+data:
+  snapshot: TBD
+  eval_set: TBD
+  feature_set: n/a
+
+model:
+  family: moe_llm
+  candidates: [mixtral-8x7b, qwen-moe, deepseek-moe]
+  total_parameters: null
+  activated_parameters: null
+  num_experts: null
+  active_experts: null
+
+training:
+  framework: n/a-inference-only
+  precision: [bf16, fp8_e4m3, fp4]
+  notes: inference / profiling only
+
+infra:
+  remote_alias: gpu-cloud-tbd
+  gpu_type: TBD
+  num_gpus: 1-2
+  interconnect: [single-gpu, nvlink, pcie, rdma]
+
+metrics:
+  primary: [decode_tokens_per_s, p95_latency_ms]
+  secondary: [fp8_tensorcore_util, per_gpu_straggler_gap, accuracy_delta]
+  serving: [qps, active_params_per_token]
+
+track_specific:
+  parallelism: [ep_degree, tp_dp_ep_mix, hot_expert_replication]
+  per_expert_signals: [token_count, roofline_regime, quant_sensitivity]
