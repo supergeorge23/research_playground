@@ -35,3 +35,58 @@ papers:
     priority: high
     url: https://arxiv.org/abs/2502.02581
     status: queued
+  # --- Track: MoE precision x parallelism co-design (LLM inference) ---
+  - key: mopeq2025
+    title: "MoPEQ: Mixture of Mixed Precision Quantized Experts"
+    topic: moe_mixed_precision
+    priority: high
+    url: https://arxiv.org/abs/2509.02512
+    status: queued
+  - key: mxmoe2025
+    title: "MxMoE: Mixed-precision Quantization for MoE with Accuracy and Performance Co-Design"
+    topic: moe_mixed_precision
+    priority: high
+    url: https://arxiv.org/abs/2505.05799
+    status: queued
+  - key: realb2026
+    title: "ReaLB: Real-Time Load Balancing for Multimodal MoE Inference"
+    topic: moe_ep_load_balancing
+    priority: high
+    url: https://arxiv.org/abs/2604.19503
+    status: queued
+  - key: tmagroupedgemm2025
+    title: "TMA-Adaptive FP8 Grouped GEMM: Eliminating Padding Requirements in Low-Precision Training and Inference on Hopper"
+    topic: fp8_grouped_gemm_kernel
+    priority: high
+    url: https://arxiv.org/abs/2508.16584
+    status: queued
+  - key: capacityaware2025
+    title: "Capacity-Aware Inference: Mitigating the Straggler Effect in Mixture of Experts"
+    topic: moe_ep_straggler
+    priority: medium
+    url: https://arxiv.org/abs/2503.05066
+    status: queued
+  - key: epsmoe2024
+    title: "EPS-MoE: Expert Pipeline Scheduler for Cost-Efficient MoE Inference"
+    topic: moe_ep_inference
+    priority: medium
+    url: https://arxiv.org/abs/2410.12247
+    status: queued
+  - key: probe2026
+    title: "PROBE: Co-Balancing Computation and Communication in MoE Inference via Real-Time Predictive Prefetching"
+    topic: moe_ep_inference
+    priority: medium
+    url: https://arxiv.org/abs/2602.00509
+    status: queued
+  - key: hobbit2024
+    title: "HOBBIT: A Mixed Precision Expert Offloading System for Fast MoE Inference"
+    topic: moe_mixed_precision
+    priority: medium
+    url: https://arxiv.org/abs/2411.01433
+    status: queued
+  - key: aep2025
+    title: "Toward Cost-Efficient Serving of Mixture-of-Experts with Asynchrony"
+    topic: moe_ep_inference
+    priority: medium
+    url: https://arxiv.org/abs/2505.08944
+    status: queued

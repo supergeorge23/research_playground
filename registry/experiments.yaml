@@ -6,3 +6,10 @@ experiments:
     objective: Validate first controlled scaling-law fit for MoE recommenders.
     docs: experiments/20260621-moe-rec-scaling-pilot/README.md
     artifact_manifest: artifacts/manifests/20260621-moe-rec-scaling-pilot.yaml
+  - id: 20260622-moe-ep-fp8-roofline-pilot
+    title: MoE EP x FP8 roofline profiling pilot
+    status: planned
+    owner: Zhengqi Wang
+    objective: "Paper 0: characterize when EP inference wins and MoE GEMM roofline regimes; test sensitivity-vs-hotness."
+    docs: experiments/20260622-moe-ep-fp8-roofline-pilot/README.md
+    artifact_manifest: artifacts/manifests/20260622-moe-ep-fp8-roofline-pilot.yaml
