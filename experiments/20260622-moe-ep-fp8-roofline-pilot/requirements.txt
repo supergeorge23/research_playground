@@ -1,0 +1,10 @@
+# Paper 0 environment. Match the torch/CUDA build to the box before installing.
+# Pick ONE serving engine (vLLM is the default in run_paper0.sh).
+vllm>=0.6.3
+# sglang[all]>=0.4            # alternative engine
+
+# Model-intrinsic passes (routing + sensitivity) use HF + a torch with fp8 dtype.
+transformers>=4.44
+datasets>=2.20
+numpy>=1.26
+# torch>=2.1 is required for float8_e4m3fn (sensitivity fake-quant); it ships with vllm.

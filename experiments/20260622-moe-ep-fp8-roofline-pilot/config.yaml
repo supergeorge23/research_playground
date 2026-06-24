@@ -5,38 +5,68 @@ experiment:
   track: moe-precision-parallelism-codesign
   hypothesis: >
     EP-inference benefit is regime-dependent and roofline-predictable; per-expert
-    quantization sensitivity is not monotone in activation frequency; FP8 realized
-    speedup depends on each expert's GEMM roofline regime.
+    quant sensitivity is not monotone in activation frequency; low-precision
+    realized speedup depends on each expert's GEMM roofline regime.
 
-data:
-  snapshot: TBD
-  eval_set: TBD
-  feature_set: n/a
+code:
+  reusable: [src/profiling/roofline.py, src/profiling/router_stats.py]
+  scripts:
+    selftest: experiments/20260622-moe-ep-fp8-roofline-pilot/selftest.py
+    routing: experiments/20260622-moe-ep-fp8-roofline-pilot/profile_routing.py
+    sensitivity: experiments/20260622-moe-ep-fp8-roofline-pilot/sensitivity.py
+    bench: experiments/20260622-moe-ep-fp8-roofline-pilot/bench_serving.py
+    orchestrator: experiments/20260622-moe-ep-fp8-roofline-pilot/run_paper0.sh
+    analyze: experiments/20260622-moe-ep-fp8-roofline-pilot/analyze.py
+    setup: experiments/20260622-moe-ep-fp8-roofline-pilot/setup_env.sh
+  requirements: experiments/20260622-moe-ep-fp8-roofline-pilot/requirements.txt
+  outputs_dir: experiments/20260622-moe-ep-fp8-roofline-pilot/outputs   # git-ignored
 
-model:
-  family: moe_llm
-  candidates: [mixtral-8x7b, qwen-moe, deepseek-moe]
-  total_parameters: null
-  activated_parameters: null
-  num_experts: null
-  active_experts: null
+models:
+  - id: mixtral-8x7b
+    hf: mistralai/Mixtral-8x7B-Instruct-v0.1
+    experts: 8
+    top_k: 2
+    granularity: coarse
+  - id: qwen-moe-a2.7b
+    hf: Qwen/Qwen1.5-MoE-A2.7B-Chat
+    experts: 60
+    top_k: 4
+    granularity: fine
 
-training:
-  framework: n/a-inference-only
-  precision: [bf16, fp8_e4m3, fp4]
-  notes: inference / profiling only
+sweep:
+  engine: vllm            # or sglang
+  gpu: a100-80-sxm
+  parallel: [ep8, tp8]    # EP vs TP at world size 8 -- the core A100 systems result
+  dtype: [bf16]           # default; add int8 once a pre-quantized W8A8/AWQ ckpt is set
+  input_len: [1024, 8192]
+  output_len: [128]
+  concurrency: [1, 16, 64]
+  num_prompts: 256
 
-infra:
-  remote_alias: gpu-cloud-tbd
-  gpu_type: TBD
-  num_gpus: 1-2
-  interconnect: [single-gpu, nvlink, pcie, rdma]
+precision_notes:
+  bf16: baseline (312 TFLOPS TC, 2 bytes)
+  int8: real A100 low-precision (624 TOPS TC + 1-byte weights ~2x); needs pre-quantized checkpoint (INT8_MIXTRAL / INT8_QWEN)
+  fp8: H100-only for compute; analyze reports fp8@H100 ceiling as a projection
+  note: fp16 == bf16 in A100 speed/bytes (accuracy-only axis); fp32 is not a realistic serving point
+
+sensitivity:
+  method: direct          # direct (Δnll/expert) | proxy (weight MSE, instant)
+  quant: int8             # A100-native low-precision target (fp8 = simulation for H100 story)
+  max_layers: 8           # subsample to bound cost
+  calib_file: null        # set to a real corpus for paper-grade perplexity
 
 metrics:
-  primary: [decode_tokens_per_s, p95_latency_ms]
-  secondary: [fp8_tensorcore_util, per_gpu_straggler_gap, accuracy_delta]
-  serving: [qps, active_params_per_token]
+  primary: [decode_tokens_per_s, tpot_p95_ms]
+  secondary: [ttft_p95_ms, ep_straggler_factor, routing_gini]
+  roofline: [gemm_bound_class, int8_realized_a100, fp8_ceiling_h100]
+  headline: hotness_vs_sensitivity_pearson_r
 
-track_specific:
-  parallelism: [ep_degree, tp_dp_ep_mix, hot_expert_replication]
-  per_expert_signals: [token_count, roofline_regime, quant_sensitivity]
+infra:
+  remote_alias: gpu-cloud-8xa100
+  gpu_type: a100-80-sxm
+  num_gpus: 8
+  interconnect: nvlink
+
+notes: >
+  A100 has no FP8 tensor cores; int8 is the on-device low-precision lever and fp8
+  is reported only as an H100 projection. fp8 tensor-core utilization is Paper 1.
