@@ -9,3 +9,8 @@ remotes:
     status: planned
     gpu: TBD
     notes: Replace with redacted alias after first GPU cloud target is available.
+  - alias: gpu-cloud-8xa100
+    type: gpu_cloud
+    status: available
+    gpu: 8x A100-80GB SXM (NVLink, single node)
+    notes: On-demand box for Paper 0 (20260622-moe-ep-fp8-roofline-pilot). Redacted alias; real host/creds kept out of Git.
