@@ -13,3 +13,17 @@ experiments:
     objective: "Paper 0: characterize when EP inference wins and MoE GEMM roofline regimes; test sensitivity-vs-hotness."
     docs: experiments/20260622-moe-ep-fp8-roofline-pilot/README.md
     artifact_manifest: artifacts/manifests/20260622-moe-ep-fp8-roofline-pilot.yaml
+  - id: 20260622-grouped-gemm-utilization-pilot
+    title: Paper 1 - grouped-GEMM utilization microbench (MoE experts)
+    status: planned
+    owner: Zhengqi Wang
+    objective: "Paper 1: measure realized utilization of the expert grouped GEMM (uniform vs skew, bf16 vs int8); establish the gap a utilization-aware kernel must close."
+    docs: experiments/20260622-grouped-gemm-utilization-pilot/README.md
+    artifact_manifest: artifacts/manifests/20260622-grouped-gemm-utilization-pilot.yaml
+  - id: 20260622-precision-placement-scheduler-pilot
+    title: Paper 2 - precision x placement scheduler (EP straggler simulation)
+    status: planned
+    owner: Zhengqi Wang
+    objective: "Paper 2: quantify precision-as-load-balancing straggler reduction vs placement-only, driven by Paper 0 routing+sensitivity."
+    docs: experiments/20260622-precision-placement-scheduler-pilot/README.md
+    artifact_manifest: artifacts/manifests/20260622-precision-placement-scheduler-pilot.yaml

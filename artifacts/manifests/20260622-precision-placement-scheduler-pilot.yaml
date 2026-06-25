@@ -1,0 +1,7 @@
+artifact_manifest:
+  experiment_id: 20260622-precision-placement-scheduler-pilot
+  status: planned
+  owner: Zhengqi Wang
+  git_commit: TBD
+  external_artifacts: []
+  notes: Paper 2 (precision x placement scheduler) simulation driven by Paper 0 data.

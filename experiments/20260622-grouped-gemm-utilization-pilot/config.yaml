@@ -1,0 +1,33 @@
+experiment:
+  id: 20260622-grouped-gemm-utilization-pilot
+  owner: Zhengqi Wang
+  status: planned
+  track: moe-precision-parallelism-codesign
+  hypothesis: >
+    Realized utilization of the expert grouped GEMM collapses under small/skewed
+    per-expert tokens; low precision's benefit is regime-dependent; a
+    utilization-aware kernel can recover it.
+
+code:
+  reusable: [src/kernels/grouped_gemm.py, src/profiling/roofline.py]
+  scripts:
+    bench: experiments/20260622-grouped-gemm-utilization-pilot/bench_grouped_gemm.py
+  outputs_dir: experiments/20260622-grouped-gemm-utilization-pilot/outputs   # git-ignored
+
+params:
+  gpu: a100-80-sxm
+  shapes:
+    - {model: mixtral-8x7b, hidden: 4096, intermediate: 14336}
+    - {model: qwen-moe-a2.7b, hidden: 2048, intermediate: 1408}
+  dtypes: [bf16, int8]      # fp8 on H100
+  dists: [uniform, skew]
+  methods: [loop, padded]
+  total_tokens_grid: [64, 512, 4096, 32768]   # decode -> prefill regimes
+
+metrics:
+  primary: [utilization, achieved_tflops]
+  secondary: [measured_over_roofline, uniform_vs_skew_gap]
+
+todo_kernel: >
+  utilization-aware, padding-free, heterogeneous-precision grouped GEMM (Triton /
+  CUTLASS) -- the Paper 1 contribution; benchmarked with bench_grouped_gemm.py.
