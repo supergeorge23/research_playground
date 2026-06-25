@@ -49,7 +49,11 @@ grouped GEMM hit tensor-core peak in the small/skewed-token regime?
 > Hardware note: "low precision" = **INT8 (W8A8)** on the available A100 (no FP8
 > tensor cores; real ~2x via INT8 tensor cores + 1-byte weights) and **FP8** on
 > H100 (reported by the roofline as a projection). BF16/FP16 are the baseline, not
-> a precision lever.
+> a precision lever. Software gap (and Paper 1 motivation): current serving stacks
+> do NOT expose W8A8-INT8 for MoE on A100 (vLLM W8A8 is Hopper/Ada-only; Marlin-MoE
+> has A100 bugs, vLLM #35922). So on A100, low-precision *serving* is best-effort
+> via W4A16 GPTQ, while the precision signal comes from the (fake-quant)
+> sensitivity pass — closing that serving gap is exactly Paper 1.
 
 ## Paper Sequence
 

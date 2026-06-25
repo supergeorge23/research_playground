@@ -1,0 +1,34 @@
+experiment:
+  id: 20260622-precision-placement-scheduler-pilot
+  owner: Zhengqi Wang
+  status: planned
+  track: moe-precision-parallelism-codesign
+  hypothesis: >
+    Precision is a load-balancing dimension: down-casting overloaded,
+    non-sensitive experts cuts the synchronous EP straggler beyond placement
+    alone, at a controllable accuracy cost.
+
+code:
+  reusable:
+    - src/scheduler/precision_placement.py
+    - src/scheduler/cost_model.py
+    - src/profiling/roofline.py
+    - src/profiling/router_stats.py
+  scripts:
+    eval: experiments/20260622-precision-placement-scheduler-pilot/eval_paper2.py
+  inputs_from: 20260622-moe-ep-fp8-roofline-pilot   # Paper 0 routing + sensitivity
+  outputs_dir: experiments/20260622-precision-placement-scheduler-pilot/outputs   # git-ignored
+
+params:
+  gpu: a100-80-sxm
+  ep_size: 8
+  budgets: [0, 0.05, 0.1, 0.2, 0.5]   # accuracy budget as fraction of per-layer downcastable sensitivity
+
+metrics:
+  primary: [mean_straggler_cut_vs_lpt_pct, mean_acc_cost]
+  secondary: [mean_experts_downcast, lpt_cut_vs_rr_pct]
+
+notes: >
+  Simulation driven by Paper 0 data; no kernel required. On A100 the low-precision
+  lever is INT8; on H100 it is FP8 (cost model picks per gpu). Real-system
+  integration (apply the schedule inside a serving engine) is the follow-on.

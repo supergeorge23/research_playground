@@ -41,11 +41,19 @@ hf_id () {  # base bf16 checkpoint
   esac
 }
 
-int8_id () {  # pre-quantized W8A8/AWQ checkpoint for real A100 low precision
+int8_id () {  # pre-quantized W8A8 ckpt (real compute low-prec; vLLM W8A8 = Hopper/Ada, NOT A100)
   case "$1" in
     mixtral-8x7b)   echo "${INT8_MIXTRAL:-}";;
     qwen-moe-a2.7b) echo "${INT8_QWEN:-}";;
     *)              echo "${INT8_MODEL:-}";;
+  esac
+}
+
+w4a16_id () {  # weight-only 4-bit (GPTQ/AWQ) -- the runnable A100 low-prec serving point.
+  case "$1" in  # NOTE: quantized-MoE serving on A100 (Marlin) is best-effort (vLLM #35922).
+    qwen-moe-a2.7b) echo "${W4A16_QWEN:-Qwen/Qwen1.5-MoE-A2.7B-Chat-GPTQ-Int4}";;
+    mixtral-8x7b)   echo "${W4A16_MIXTRAL:-}";;
+    *)              echo "${W4A16_MODEL:-}";;
   esac
 }
 
@@ -55,7 +63,10 @@ resolve () {  # short dtype -> sets MID + QFLAGS; returns 1 to skip this point
   case "$dtype" in
     bf16) MID="$(hf_id "$short")";;
     int8) MID="$(int8_id "$short")"
-          [[ -z "$MID" ]] && { echo "SKIP int8/$short: set INT8_${short^^} to a pre-quantized checkpoint"; return 1; };;
+          [[ -z "$MID" ]] && { echo "SKIP int8/$short: W8A8 needs a pre-quantized ckpt and vLLM W8A8 is Hopper/Ada (not A100); set INT8_${short^^}"; return 1; };;
+    w4a16) MID="$(w4a16_id "$short")"
+          [[ -z "$MID" ]] && { echo "SKIP w4a16/$short: set W4A16_${short^^} to a GPTQ/AWQ checkpoint"; return 1; }
+          [[ "$GPU" == a100* ]] && echo "NOTE: w4a16 MoE serving on $GPU uses Marlin (best-effort; may hit vLLM #35922).";;
     fp8)  [[ "$GPU" == a100* ]] && { echo "SKIP fp8/$short on $GPU (no FP8 tensor cores)"; return 1; }
           MID="$(hf_id "$short")"; QFLAGS=(--quantization fp8);;
     *)    MID="$(hf_id "$short")";;

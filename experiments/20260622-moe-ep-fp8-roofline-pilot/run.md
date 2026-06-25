@@ -18,11 +18,16 @@ Experiment ID: `20260622-moe-ep-fp8-roofline-pilot`
 A100 (Ampere) has **no FP8 tensor cores**, so the precision axis is:
 
 - **bf16** — baseline (312 TFLOPS TC, 2 bytes). Default serving point.
-- **int8** — the REAL low-precision lever on A100 (624 TOPS TC + 1-byte weights ≈
-  2× compute AND 2× weight traffic). The faithful stand-in for "what FP8 does on
-  H100". Serving int8 needs a **pre-quantized W8A8 / AWQ checkpoint**: set
-  `INT8_MIXTRAL` / `INT8_QWEN` to its HF id and add `int8` to `DTYPES`.
-  The `sensitivity.py` pass fake-quantizes ourselves, so it uses int8 out of the box.
+- **int8 (W8A8)** — hardware-capable on A100 (624 TOPS TC + 1-byte weights ≈ 2×
+  compute and 2× weight traffic), the faithful stand-in for FP8-on-H100 — BUT
+  vLLM's W8A8 *serving* path is Hopper/Ada-only, so you can't serve a W8A8 MoE on
+  A100 today. `sensitivity.py` fake-quantizes ourselves, so its int8 sensitivity
+  numbers run on A100 regardless — that is where the int8 precision signal lives.
+- **w4a16 (GPTQ/AWQ, weight-only 4-bit)** — the runnable A100 low-precision
+  *serving* point (real weight-traffic win in memory-bound decode via Marlin).
+  Default Qwen ckpt: `Qwen/Qwen1.5-MoE-A2.7B-Chat-GPTQ-Int4` (override `W4A16_QWEN`);
+  add `w4a16` to `DTYPES`. **Best-effort**: quantized-MoE on A100 (Marlin) may hit
+  vLLM #35922 — keep bf16 as the guaranteed path; don't burn hours on it.
 - **fp8** — NOT used on A100 (would be emulated/weight-only). Kept for a future
   H100 run; `analyze.py` reports the **fp8@H100 ceiling as a projection** regardless.
 
@@ -53,10 +58,12 @@ huggingface-cli login          # Mixtral is gated: log in and accept its license
 MODELS=qwen-moe-a2.7b DTYPES=bf16 CONCS="1 16" SENS_METHOD=proxy \
   bash experiments/20260622-moe-ep-fp8-roofline-pilot/run_paper0.sh
 
-# full sweep (add int8 once you have a pre-quantized checkpoint):
-export INT8_MIXTRAL=<hf-id-of-a-W8A8-or-AWQ-Mixtral>   # optional
+# add the runnable A100 low-precision point (W4A16; Qwen GPTQ-Int4 is the default):
+#   first: pip install -U "git+https://github.com/huggingface/transformers"  # qwen2_moe
 export CALIB_FILE=/path/to/calib.txt                   # optional, for paper-grade ppl
-DTYPES="bf16 int8" bash experiments/20260622-moe-ep-fp8-roofline-pilot/run_paper0.sh
+DTYPES="bf16 w4a16" bash experiments/20260622-moe-ep-fp8-roofline-pilot/run_paper0.sh
+# best-effort: if the Marlin-MoE A100 path crashes (vLLM #35922), fall back to
+# DTYPES=bf16 and rely on the sensitivity pass; real low-prec serving = H100.
 python3 experiments/20260622-moe-ep-fp8-roofline-pilot/analyze.py \
     --results-dir experiments/20260622-moe-ep-fp8-roofline-pilot/outputs
 ```

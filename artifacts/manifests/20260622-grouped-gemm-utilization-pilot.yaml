@@ -1,0 +1,7 @@
+artifact_manifest:
+  experiment_id: 20260622-grouped-gemm-utilization-pilot
+  status: planned
+  owner: Zhengqi Wang
+  git_commit: TBD
+  external_artifacts: []
+  notes: Paper 1 grouped-GEMM utilization microbench (baseline + the gap to beat).
